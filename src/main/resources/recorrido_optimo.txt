@@ -1,0 +1,16 @@
+LEFT
+DOWN
+DOWN
+O
+I
+UP
+P
+UP
+RIGHT
+DOWN
+I
+P
+Z
+UP
+DOWN
+F

@@ -1,0 +1,54 @@
+Comando: LEFT
+Resultado: MEDICO
+
+Comando: DOWN
+Resultado: NPC
+
+Comando: DOWN
+Resultado: FRUTERO
+
+Comando: O
+Resultado: HAS ENCONTRADO UN FRUTA
+
+Comando: I
+Resultado: REVISAS TU MOCHILITA Y TIENES: 
+0 visas
+0 ibuprofenos 
+1 frutas
+
+Comando: UP
+Resultado: NPC
+
+Comando: P
+Resultado: Te encuentras en la habitación: NPC y sus salidas son: Norte, Sur, Oeste
+
+Comando: UP
+Resultado: MEDICO
+
+Comando: RIGHT
+Resultado: INICIAL
+
+Comando: DOWN
+Resultado: VIAJERO
+
+Comando: I
+Resultado: REVISAS TU MOCHILITA Y TIENES: 
+0 visas
+0 ibuprofenos 
+1 frutas
+
+Comando: P
+Resultado: Te encuentras en la habitación: VIAJERO y sus salidas son: Norte, Sur
+
+Comando: Z
+Resultado: Comando no reconocido: Z
+
+Comando: UP
+Resultado: INICIAL
+
+Comando: DOWN
+Resultado: VIAJERO
+
+Comando: F
+Resultado: Finalizando el juego...
+

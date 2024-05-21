@@ -104,6 +104,7 @@ public class HabitacionPrePollitoController extends HabitacionBase {
                 cuadroTexto.setText("HAS ENTRADO, PULSA ENTER");
                 juego.actualizarDecision("R");
                 primerEncuentro = true;
+                juego.irA("oeste");
             }
             default ->
                 cuadroTexto.setText(MENSAJE_ERROR);

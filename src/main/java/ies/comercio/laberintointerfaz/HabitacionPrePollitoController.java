@@ -155,6 +155,7 @@ public class HabitacionPrePollitoController extends HabitacionBase {
         switch (event.getCode()) {
             case S -> {
                 cuadroTexto.setText(juego.darFruta("S"));
+                evento = true;
                 decisionTomada = true;
             }
             case N -> {

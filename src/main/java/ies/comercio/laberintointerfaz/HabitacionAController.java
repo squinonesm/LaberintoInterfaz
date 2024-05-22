@@ -10,6 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import static javafx.scene.input.KeyCode.F;
+import static javafx.scene.input.KeyCode.H;
+import static javafx.scene.input.KeyCode.I;
+import static javafx.scene.input.KeyCode.P;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import laberintoJuego.Habitacion;
@@ -98,7 +102,6 @@ public class HabitacionAController extends HabitacionBase {
         try {
             cargarComandosDesdeFichero("recorrido_optimo.txt");
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -116,22 +119,19 @@ public class HabitacionAController extends HabitacionBase {
                 case O -> {
                     cuadroTexto.setText(juego.olfatear());
                     switch (cuadroTexto.getText()) {
-                        case ENCONTRAR_IBUPROFENO:
+                        case ENCONTRAR_IBUPROFENO ->
                             imagenA.setImage(IBUPROFENO);
-                            break;
-                        case ENCONTRAR_FRUTA:
+                        case ENCONTRAR_FRUTA ->
                             imagenA.setImage(FRUTA);
-                            break;
-                        case ENCONTRAR_VISA:
+                        case ENCONTRAR_VISA ->
                             imagenA.setImage(VISA);
-                            break;
-                        default:
-                            break;
+                        default -> {
+                        }
                     }
-                    PauseTransition pause = new PauseTransition(Duration.seconds(5));
+                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
                     pause.setOnFinished(e -> {
-                        actualizarVista();
-                        cuadroTexto.setText(juego.descripcionHabitacion());
+                    actualizarVista();
+                    cuadroTexto.setText(actualizarTexto());
                     });
                     pause.play();
                     return;

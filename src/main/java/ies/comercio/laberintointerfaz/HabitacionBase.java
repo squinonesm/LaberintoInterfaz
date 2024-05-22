@@ -11,13 +11,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import laberintoJuego.Habitacion;
 import laberintoJuego.Juego;
 
 /**
  * Clase abstracta que sirve como base para las habitaciones del juego. Contiene
  * métodos comunes y lógica compartida entre las habitaciones.
- * 
- *  @author Quiñones Majuelo, Sergio
+ *
+ * @author Quiñones Majuelo, Sergio
  */
 public abstract class HabitacionBase implements Initializable, ControladorGeneral {
 
@@ -25,6 +26,19 @@ public abstract class HabitacionBase implements Initializable, ControladorGenera
     protected Juego juego;
 
     protected String COMANDO_ERRONEO = "ESE COMANDO NO EXISTE DEBERIAS REVISARLOS USANDO H";
+
+    private final String HABITACION_MEDICO = """
+                                             BIENVENIDO A LA HABITACION DEL MEDICO
+                                             PARECE SER QUE ES UNA HABITACION LLENA DE MEDICINAS, PUEDE SER QUE HAYA ALGO UTIL""";
+    private final static String HABITACION_PASO_2 = "PARECE UN BOSQUE NORMALITO";
+    private final static String HABITACION_PASO = """
+                                                  PARECE UN BOSQUE NORMALITO, PERO A LO LEJOS SE VEN UNOS ARBOLES MUY FRONDOSOS LLENOS DE FRUTA,
+                                                   QUIZAS DEBERIA IR HACIA ALLI""";
+    private final String HABITACION_FRUTERO = "ES UN BOSQUE LLENO DE FRUTA!!!!";
+    private final String HABITACION_VIAJERO = """
+                                              CUENTA LA LEYENDA QUE EN ESTE BOSQUE UN VIAJERO PERDIO SUS PERTENENCIAS
+                                              SERIA INTERESANTE INVESTIGAR""";
+    private final String MENSAJE_ERROR = "DIRECCIÓN NO VÁLIDA";
 
     /**
      * Carga una serie de comandos desde un archivo y ejecuta cada uno de ellos,
@@ -157,33 +171,48 @@ public abstract class HabitacionBase implements Initializable, ControladorGenera
                 }
                 case UP -> {
                     cuadroTexto.setText(juego.irA("norte"));
+                    if (!cuadroTexto.getText().equals(MENSAJE_ERROR)) {
+                        cuadroTexto.setText(actualizarTexto());
+                    }
                 }
                 case DOWN -> {
                     switch (juego.descripcionHabitacion()) {
                         case "VIAJERO" -> {
-                            cuadroTexto.setText("VIAJERO");
+                            cuadroTexto.setText(HABITACION_VIAJERO);
                             main.cambiarEscena("preNoxus");
                         }
-                        default ->
+                        default -> {
                             cuadroTexto.setText(juego.irA("sur"));
+                            if (!cuadroTexto.getText().equals(MENSAJE_ERROR)) {
+                                cuadroTexto.setText(actualizarTexto());
+                            }
+                        }
                     }
                 }
                 case LEFT -> {
                     switch (juego.descripcionHabitacion()) {
                         case "FRUTERO" -> {
-                            cuadroTexto.setText("FRUTERO");
+                            cuadroTexto.setText(HABITACION_FRUTERO);
                             main.cambiarEscena("prePollito");
                         }
                         case "MEDICO" -> {
-                            cuadroTexto.setText("MEDICO");
+                            cuadroTexto.setText(HABITACION_MEDICO);
                             main.cambiarEscena("hbComida");
                         }
-                        default ->
+                        default -> {
                             cuadroTexto.setText(juego.irA("oeste"));
+                            if (!cuadroTexto.getText().equals(MENSAJE_ERROR)) {
+                                cuadroTexto.setText(actualizarTexto());
+                            }
+                        }
                     }
                 }
-                case RIGHT ->
+                case RIGHT -> {
                     cuadroTexto.setText(juego.irA("este"));
+                    if (!cuadroTexto.getText().equals(MENSAJE_ERROR)) {
+                        cuadroTexto.setText(actualizarTexto());
+                    }
+                }
                 default ->
                     cuadroTexto.setText(COMANDO_ERRONEO);
             }
@@ -191,4 +220,35 @@ public abstract class HabitacionBase implements Initializable, ControladorGenera
 
     }
 
+    /**
+     * Actualiza el texto mostrado en el área de texto de acuerdo con la
+     * habitación actual del juego.
+     *
+     * @return El texto actualizado para mostrar en el área de texto.
+     */
+    public String actualizarTexto() {
+        Habitacion habitacionActual = juego.saberHabitacionActual();
+
+        switch (habitacionActual.getDescripcion()) {
+            case "MEDICO" -> {
+                return HABITACION_MEDICO;
+            }
+            case "VIAJERO" -> {
+                return HABITACION_VIAJERO;
+            }
+            case "HABITACION DE PASO" -> {
+                return HABITACION_PASO;
+            }
+            case "HABITACION DE PASO 2" -> {
+                return HABITACION_PASO_2;
+            }
+            case "FRUTERO" -> {
+                return HABITACION_FRUTERO;
+            }
+            default -> {
+                return "INICIAL";
+            }
+        }
+
+    }
 }

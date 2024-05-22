@@ -19,6 +19,8 @@ public final class Juego {
     private int visa = 0, fruta = 0, ibuprofeno = 0, visasUsadas = 0, ibuprofenosUsados = 0;
     private String decision = "";
     private int contador = 0; // Para verificar si le has dado fruta a Pollito
+    
+    private final String MENSAJE_ERROR = "DIRECCIÓN NO VÁLIDA";
 
     
     /**
@@ -144,13 +146,13 @@ public final class Juego {
 
             if (habitacionActual.getDescripcion().equals("SALIDA")) {
                 System.out.println("Has llegado a la salida");
-                System.exit(0);
+                //System.exit(0);
             }
 
             return habitacionActual.getDescripcion();
 
         } else {
-            return "Dirección no válida";
+            return MENSAJE_ERROR;
         }
     }
 
@@ -309,7 +311,7 @@ public final class Juego {
      */
     private void habitacionPollito() {
         if (((HabitacionPollito) habitacionActual).accionPollito(this.decision)) {
-            System.exit(0);
+            // System.exit(0);
         }
 
     }

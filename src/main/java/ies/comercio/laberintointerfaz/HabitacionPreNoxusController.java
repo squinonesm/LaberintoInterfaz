@@ -3,12 +3,14 @@ package ies.comercio.laberintointerfaz;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 import laberintoJuego.Juego;
 
 /**
@@ -35,19 +37,23 @@ public class HabitacionPreNoxusController extends HabitacionBase {
                                          \u00bfTE ENCUENTRAS CON NOXUS QUIERES ACEPTAR SU AYUDA?
                                          PULSA S PARA ACEPTAR O N PARA NO ACEPTAR""";
     private final String NOXUS = "Noxus te mira fijamente";
-    
+
     private final String AEROPUERTO = """
                                       TE HAS CONSEGUIDO SALVAR POR LA MINIMA, 
                                       VES A NOXUS MIRARTE CON RECELO DESDE LEJOS LO MEJOR SERA IRSE PRONTO DE AQUI""";
 
     private final String USAR_VISA = "FUISTE LLEVADO AL AEROPUERTO LISTO PARA SER DEPORTADO, PERO MUESTRAS TU VISA"
             + "Y TE DEJAN QUEDARTE";
-    
+
+    private final String TRAMPA = "Aceptas la ayuda de Noxus. Este te ha engañado y te mete en un avión para deportarte.";
+
+    private final String FIN_JUEGO = "GAME OVER";
 
     private final Image NOXUS_IMAGEN = new Image(getClass().getResourceAsStream("/imagenes/gatoLaberinto.jpeg"));
     private final Image VISA = new Image(getClass().getResourceAsStream("/imagenes/visaLaberinto.jpeg"));
     private final Image AVION = new Image(getClass().getResourceAsStream("/imagenes/avionLaberinto.jpeg"));
     private final Image AEROPUERTO_VISA = new Image(getClass().getResourceAsStream("/imagenes/aeropuertoLaberinto.jpeg"));
+    private final Image MUERTE = new Image(getClass().getResourceAsStream("/imagenes/muerteLaberinto.jpg"));
 
     /**
      * Inicializa la habitación previa a Noxus.
@@ -99,9 +105,9 @@ public class HabitacionPreNoxusController extends HabitacionBase {
                     manejarDecision("N");
                 case UP -> {
                     if (!evento) {
-                        estadoInicial();
                         main.cambiarEscena("hbA");
                         juego.irA("norte");
+                        estadoInicial();
                     }
                 }
                 default -> {
@@ -114,8 +120,8 @@ public class HabitacionPreNoxusController extends HabitacionBase {
             }
         }
     }
-    
-    public void estadoInicial(){
+
+    public void estadoInicial() {
         cuadroTexto.setText(TEXTO_INICIAL);
         evento = true;
         imagenA.setImage(NOXUS_IMAGEN);
@@ -150,7 +156,7 @@ public class HabitacionPreNoxusController extends HabitacionBase {
         imagenA.setImage(VISA);
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(1000);
                 Platform.runLater(() -> {
                     cuadroTexto.setText(AEROPUERTO);
                     evento = false;
@@ -165,8 +171,16 @@ public class HabitacionPreNoxusController extends HabitacionBase {
      * Maneja la situación cuando el jugador no tiene una visa.
      */
     private void manejarNoVisa() {
-        cuadroTexto.setText("Aceptas la ayuda de Noxus. Este te ha engañado y te mete en un avión para deportarte.");
+        cuadroTexto.setText(TRAMPA);
         imagenA.setImage(AVION);
-        main.cerrarAplicacion();
+        PauseTransition pausaAvion = new PauseTransition(Duration.seconds(2));
+        pausaAvion.setOnFinished(event -> {
+            imagenA.setImage(MUERTE);
+            cuadroTexto.setText(FIN_JUEGO);
+            PauseTransition pausaMuerte = new PauseTransition(Duration.seconds(2));
+            pausaMuerte.setOnFinished(e -> main.cerrarAplicacion());
+            pausaMuerte.play();
+        });
+        pausaAvion.play();
     }
 }

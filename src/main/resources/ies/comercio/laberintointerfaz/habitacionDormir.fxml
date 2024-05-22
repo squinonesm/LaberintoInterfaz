@@ -9,7 +9,7 @@
    <children>
       <ImageView fx:id="imagenA" fitHeight="362.0" fitWidth="650.0" pickOnBounds="true">
          <viewport>
-            <Rectangle2D height="500.0" width="1000.0" />
+            <Rectangle2D width="500.0" />
          </viewport></ImageView>
       <TextArea fx:id="cuadroTexto" layoutY="362.0" onKeyPressed="#avanzar" prefHeight="79.0" prefWidth="650.0" />
    </children>

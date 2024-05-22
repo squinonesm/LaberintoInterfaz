@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.comercio.laberintointerfaz.HabitacionAController">
    <children>
@@ -13,6 +14,9 @@
             <Rectangle2D width="500.0" />
          </viewport></ImageView>
       <TextArea fx:id="cuadroTexto" layoutY="362.0" onKeyPressed="#avanzar" prefHeight="79.0" prefWidth="650.0" />
-      <Button fx:id="botonBot" layoutX="553.0" layoutY="337.0" mnemonicParsing="false" onAction="#fichero" prefHeight="25.0" prefWidth="97.0" text="BOT" />
+      <Button fx:id="botonBot" layoutX="553.0" layoutY="337.0" mnemonicParsing="false" onAction="#fichero" prefHeight="25.0" prefWidth="97.0" text="BOT" textFill="#9f9eaa">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

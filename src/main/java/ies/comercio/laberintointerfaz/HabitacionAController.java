@@ -94,6 +94,7 @@ public class HabitacionAController extends HabitacionBase {
     void fichero(ActionEvent event) {
         imagenA.setImage(IA);
         cuadroTexto.setText("DEJA A LA IA JUGAR TRANQUILA.");
+        botonBot.setDisable(true);
         System.out.println("Botón presionado. Intentando cargar comandos desde fichero.");
         try {
             cargarComandosDesdeFichero("recorrido_optimo.txt");
@@ -124,7 +125,7 @@ public class HabitacionAController extends HabitacionBase {
                         default -> {
                         }
                     }
-                    PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                    PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                     pause.setOnFinished(e -> {
                     actualizarVista();
                     cuadroTexto.setText(actualizarTexto());

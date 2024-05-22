@@ -29,9 +29,10 @@ public class HabitacionComidaController extends HabitacionBase {
     private boolean evento = true;
     private final Image IMAGE_RUN = new Image(getClass().getResourceAsStream("/imagenes/rataCorriendo.jpeg"));
     private final Image TARTA = new Image(getClass().getResourceAsStream("/imagenes/tartaLaberinto.jpeg"));
-    private final Image MATE = new Image(getClass().getResourceAsStream("/imagenes/mate.jpg"));
+    private final Image MATE = new Image(getClass().getResourceAsStream("/imagenes/mateLaberinto.jpg"));
     private final Image POST_DECISION_MATE = new Image(getClass().getResourceAsStream("/imagenes/rataSaciosaLaberinto.jpg"));
     private final Image POST_DECISION_TARTA = new Image(getClass().getResourceAsStream("/imagenes/rataGolosaLaberinto.jpg"));
+    private final Image MUERTE = new Image(getClass().getResourceAsStream("/imagenes/muerteLaberinto.jpg"));
 
     private final String MENSAJE_IBUPROFENO = """
                                               LA COMIDA TE PRODUCE MALESTAR, PERO COMO TENIAS UN IBUPROFENO, 
@@ -81,10 +82,10 @@ public class HabitacionComidaController extends HabitacionBase {
         if (!evento) {
             switch (event.getCode()) {
                 case RIGHT -> {
+                    main.cambiarEscena("hbA");  
                     estadoInicial();
                     evento = true;
-                    main.cambiarEscena("hbA");
-                    juego.irA("este");
+                    juego.irA("este");       
                 }
                 default ->
                     super.avanzar(event, cuadroTexto);
@@ -117,7 +118,6 @@ public class HabitacionComidaController extends HabitacionBase {
         postDecision();
         postDecision.setImage(POST_DECISION_MATE);
         manejarDecision("M");
-        evento = false;
     }
 
     /**
@@ -131,7 +131,6 @@ public class HabitacionComidaController extends HabitacionBase {
         postDecision();
         postDecision.setImage(POST_DECISION_TARTA);
         manejarDecision("T");
-        evento = false;
     }
 
     public void postDecision() {
@@ -152,10 +151,10 @@ public class HabitacionComidaController extends HabitacionBase {
         if (juego.descripcionHabitacion().equals("MEDICO")) {
             juego.irA("oeste");
         }
-        evento = false;
 
         if (juego.tenerIbuprofeno()) {
             manejarIbuprofeno();
+            evento = false;
         } else if (decision.equals("T")) {
             manejarTarta();
         } else if (decision.equals("M")) {
@@ -196,13 +195,12 @@ public class HabitacionComidaController extends HabitacionBase {
         postDecision.setVisible(false);
         muerte.setImage(IMAGE_RUN);
 
-        PauseTransition pause1 = new PauseTransition(Duration.seconds(5));
+        PauseTransition pause1 = new PauseTransition(Duration.seconds(2));
         pause1.setOnFinished(e -> {
-            Image image3 = new Image(getClass().getResourceAsStream("/imagenes/deatj.jpg"));
-            muerte.setImage(image3);
+            muerte.setImage(MUERTE);
             cuadroTexto.setText(MENSAJE_MUERTE);
 
-            PauseTransition pause2 = new PauseTransition(Duration.seconds(5));
+            PauseTransition pause2 = new PauseTransition(Duration.seconds(2));
             pause2.setOnFinished(ev -> main.cerrarAplicacion());
             pause2.play();
         });

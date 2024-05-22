@@ -3,11 +3,13 @@ package ies.comercio.laberintointerfaz;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 import laberintoJuego.Juego;
 
 /**
@@ -29,6 +31,7 @@ public class HabitacionPrePollitoController extends HabitacionBase {
     private final Image IMAGE = new Image(getClass().getResourceAsStream("/imagenes/murcielagoDecisionLaberinto.jpeg"));
     private final Image IMAGE2 = new Image(getClass().getResourceAsStream("/imagenes/murcielagoLaberintoR.jpeg"));
     private final Image IMAGE3 = new Image(getClass().getResourceAsStream("/imagenes/murcielagoLaberintoBadEnding.jpeg"));
+    private final Image MUERTE = new Image(getClass().getResourceAsStream("/imagenes/muerteLaberinto.jpg"));
 
     private final String TEXTO_INICIAL = """
                                                 TE ENCUENTRAS CON POLLITO. \u00bfQUIERES ATACARLO O HACER UNA REVERENCIA?
@@ -50,6 +53,8 @@ public class HabitacionPrePollitoController extends HabitacionBase {
                                                 PULSA S PARA D\u00c1RSELA O N PARA NO D\u00c1RSELA""";
     private final String MENSAJE_POLLITO = "POLLITO TE MIRA FIJAMENTE";
     private final String MENSAJE_DEVORADO = "Has decicido no darle la fruta a pollito.. y VAS A SER DEVORADO";
+
+    private final String FIN_JUEGO = "GAME OVER";
 
     @FXML
     private TextArea cuadroTexto;
@@ -103,7 +108,15 @@ public class HabitacionPrePollitoController extends HabitacionBase {
             case A -> {
                 cuadroTexto.setText(MENSAJE_ATACAR);
                 imagenA.setImage(IMAGE3);
-                main.cerrarAplicacion();
+                PauseTransition pausaAtaque = new PauseTransition(Duration.seconds(1));
+                pausaAtaque.setOnFinished(e -> {
+                    imagenA.setImage(MUERTE);
+                    cuadroTexto.setText(FIN_JUEGO);
+                    PauseTransition pausaGameOver = new PauseTransition(Duration.seconds(1));
+                    pausaGameOver.setOnFinished(e2 -> main.cerrarAplicacion());
+                    pausaGameOver.play();
+                });
+                pausaAtaque.play();
             }
             case R -> {
                 if (juego.saberHabitacionActual().getDescripcion().equals("POLLITO")) {
@@ -161,8 +174,15 @@ public class HabitacionPrePollitoController extends HabitacionBase {
             case N -> {
                 imagenA.setImage(IMAGE3);
                 cuadroTexto.setText(MENSAJE_DEVORADO);
-                main.cerrarAplicacion();
-                decisionTomada = true;
+                PauseTransition pausaAtaque = new PauseTransition(Duration.seconds(2));
+                pausaAtaque.setOnFinished(e -> {
+                    imagenA.setImage(MUERTE);
+                    cuadroTexto.setText(FIN_JUEGO);
+                    PauseTransition pausaGameOver = new PauseTransition(Duration.seconds(2));
+                    pausaGameOver.setOnFinished(e2 -> main.cerrarAplicacion());
+                    pausaGameOver.play();
+                });
+                pausaAtaque.play();
             }
             default ->
                 cuadroTexto.setText(MENSAJE_ERROR3);

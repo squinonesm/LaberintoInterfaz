@@ -100,7 +100,7 @@ public class App extends Application {
     public void cerrarAplicacion() {
         new Thread(() -> {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(2000);
                 Platform.runLater(Platform::exit);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

@@ -44,7 +44,7 @@ public class HabitacionDormirController extends HabitacionBase {
     private final String TEXTO_DORMIR_CONT
             = """
               Pollito te ve durmiendo tan tranquilo despu\u00e9s de haberte indicado la salida.
-               Se cabrea tanto que decide cogerte con sus patitas y tirarte al mar, 
+              Se cabrea tanto que decide cogerte con sus patitas y tirarte al mar, 
               donde mueres ahogado.""";
     private final String TEXTO_NO_DORMIR = "A seguir la aventura";
     private final String ERROR_MESSAGE = """
@@ -52,10 +52,13 @@ public class HabitacionDormirController extends HabitacionBase {
                                             O N PARA NO ECHARTE LA SIESTA
                                         """;
 
+    private final String FIN_JUEGO = "GAME OVER";
+
     private final Image DORMIR = new Image(getClass().getResourceAsStream("/imagenes/dormirLaberinto.jpg"));
     private final Image DURMIENDO = new Image(getClass().getResourceAsStream("/imagenes/durmiendoLaberinto.jpg"));
     private final Image DURMIENDO_FRUTA = new Image(getClass().getResourceAsStream("/imagenes/rataMalaLaberinto.jpg"));
-    
+    private final Image MUERTE = new Image(getClass().getResourceAsStream("/imagenes/muerteLaberinto.jpg"));
+
     /**
      * Inicializa la habitación del sueño.
      *
@@ -109,7 +112,16 @@ public class HabitacionDormirController extends HabitacionBase {
                             simularDormir(() -> {
                                 imagenA.setImage(DURMIENDO_FRUTA);
                                 cuadroTexto.setText(TEXTO_DORMIR_CONT);
-                                main.cerrarAplicacion();
+
+                                PauseTransition pausaMuerte = new PauseTransition(Duration.seconds(2));
+                                pausaMuerte.setOnFinished(e -> {
+                                    imagenA.setImage(MUERTE);
+                                    cuadroTexto.setText(FIN_JUEGO);
+                                    PauseTransition pausaGameOver = new PauseTransition(Duration.seconds(2));
+                                    pausaGameOver.setOnFinished(e2 -> main.cerrarAplicacion());
+                                    pausaGameOver.play();
+                                });
+                                pausaMuerte.play();
                             });
                         } else {
                             simularDormir(() -> {
@@ -120,6 +132,7 @@ public class HabitacionDormirController extends HabitacionBase {
                         }
                     }
                 }
+
                 case N -> {
                     if (evento) {
                         evento = false;
@@ -160,7 +173,7 @@ public class HabitacionDormirController extends HabitacionBase {
      * @param action La acción a realizar después de dormir.
      */
     private void simularDormir(Runnable action) {
-        PauseTransition pause = new PauseTransition(Duration.seconds(5));
+        PauseTransition pause = new PauseTransition(Duration.seconds(2));
         pause.setOnFinished(e -> Platform.runLater(action));
         pause.play();
     }

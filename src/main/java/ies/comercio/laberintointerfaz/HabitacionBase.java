@@ -33,11 +33,12 @@ public abstract class HabitacionBase implements Initializable, ControladorGenera
     private final static String HABITACION_PASO_2 = "PARECE UN BOSQUE NORMALITO";
     private final static String HABITACION_PASO = """
                                                   PARECE UN BOSQUE NORMALITO, PERO A LO LEJOS SE VEN UNOS ARBOLES MUY FRONDOSOS LLENOS DE FRUTA,
-                                                   QUIZAS DEBERIA IR HACIA ALLI""";
+                                                  QUIZAS DEBERIA IR HACIA ALLI""";
     private final String HABITACION_FRUTERO = "ES UN BOSQUE LLENO DE FRUTA!!!!";
     private final String HABITACION_VIAJERO = """
                                               CUENTA LA LEYENDA QUE EN ESTE BOSQUE UN VIAJERO PERDIO SUS PERTENENCIAS
                                               SERIA INTERESANTE INVESTIGAR""";
+    private final String HABITACION_INICIAL = "EL COMIENZO DE TU GRAN AVENTURA EN CHUPIVILLA SE ENCUENTRA AQUI!!!";
     private final String MENSAJE_ERROR = "DIRECCIÓN NO VÁLIDA";
 
     /**
@@ -246,7 +247,7 @@ public abstract class HabitacionBase implements Initializable, ControladorGenera
                 return HABITACION_FRUTERO;
             }
             default -> {
-                return "INICIAL";
+                return HABITACION_INICIAL;
             }
         }
 

@@ -156,7 +156,7 @@ public class HabitacionPreNoxusController extends HabitacionBase {
         imagenA.setImage(VISA);
         new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(3000);
                 Platform.runLater(() -> {
                     cuadroTexto.setText(AEROPUERTO);
                     evento = false;
@@ -173,7 +173,7 @@ public class HabitacionPreNoxusController extends HabitacionBase {
     private void manejarNoVisa() {
         cuadroTexto.setText(TRAMPA);
         imagenA.setImage(AVION);
-        PauseTransition pausaAvion = new PauseTransition(Duration.seconds(2));
+        PauseTransition pausaAvion = new PauseTransition(Duration.seconds(3));
         pausaAvion.setOnFinished(event -> {
             imagenA.setImage(MUERTE);
             cuadroTexto.setText(FIN_JUEGO);

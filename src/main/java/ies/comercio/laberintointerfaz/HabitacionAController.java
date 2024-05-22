@@ -125,7 +125,7 @@ public class HabitacionAController extends HabitacionBase {
                         default -> {
                         }
                     }
-                    PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+                    PauseTransition pause = new PauseTransition(Duration.seconds(1));
                     pause.setOnFinished(e -> {
                     actualizarVista();
                     cuadroTexto.setText(actualizarTexto());

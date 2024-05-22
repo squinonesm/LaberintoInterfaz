@@ -10,10 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import static javafx.scene.input.KeyCode.F;
-import static javafx.scene.input.KeyCode.H;
-import static javafx.scene.input.KeyCode.I;
-import static javafx.scene.input.KeyCode.P;
 import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import laberintoJuego.Habitacion;
@@ -94,7 +90,7 @@ public class HabitacionAController extends HabitacionBase {
      * @param event El evento del botón.
      */
     @FXML
-    void test(ActionEvent event) {
+    void fichero(ActionEvent event) {
         Image image2 = new Image(getClass().getResourceAsStream("/imagenes/ia.gif"));
         imagenA.setImage(image2);
         cuadroTexto.setText("DEJA A LA IA JUGAR TRANQUILA.");

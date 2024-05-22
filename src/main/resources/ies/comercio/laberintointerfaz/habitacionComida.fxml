@@ -4,11 +4,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.comercio.laberintointerfaz.HabitacionComidaController">
+<AnchorPane id="AnchorPane" minHeight="441.0" minWidth="650.0" prefHeight="441.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.comercio.laberintointerfaz.HabitacionComidaController">
    <children>
-      <ImageView fx:id="muerte" fitHeight="339.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imagenA" fitHeight="339.0" fitWidth="312.0" layoutX="298.0" onMouseClicked="#tarta" pickOnBounds="true" preserveRatio="true" />
-      <TextArea fx:id="cuadroTexto" layoutY="339.0" onKeyPressed="#avanzar" prefHeight="72.0" prefWidth="610.0" />
-      <ImageView fx:id="imagenA1" fitHeight="339.0" fitWidth="304.0" onMouseClicked="#mate" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="muerte" fitHeight="362.0" fitWidth="650.0" pickOnBounds="true" />
+      <ImageView fx:id="imagenA" fitHeight="362.0" fitWidth="330.0" layoutX="328.0" onMouseClicked="#tarta" pickOnBounds="true" />
+      <ImageView fx:id="imagenA1" fitHeight="362.0" fitWidth="330.0" onMouseClicked="#mate" pickOnBounds="true" />
+      <TextArea fx:id="cuadroTexto" layoutY="362.0" onKeyPressed="#avanzar" prefHeight="79.0" prefWidth="650.0" />
    </children>
 </AnchorPane>

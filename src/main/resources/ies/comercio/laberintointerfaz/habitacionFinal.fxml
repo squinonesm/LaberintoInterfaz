@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.comercio.laberintointerfaz.HabitacionFinalController">
+<AnchorPane id="AnchorPane" minHeight="441.0" minWidth="650.0" prefHeight="441.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.comercio.laberintointerfaz.HabitacionFinalController">
    <children>
-      <TextField layoutX="206.0" layoutY="169.0" text="THE END" />
+      <TextField layoutX="239.0" layoutY="152.0" text="THE END" />
+      <Button layoutX="222.0" layoutY="312.0" mnemonicParsing="false" onAction="#fin" prefHeight="25.0" prefWidth="191.0" text="SALIR" />
    </children>
 </AnchorPane>

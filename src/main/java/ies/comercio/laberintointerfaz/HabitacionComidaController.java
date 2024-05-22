@@ -31,6 +31,15 @@ public class HabitacionComidaController extends HabitacionBase {
     private final Image TARTA = new Image(getClass().getResourceAsStream("/imagenes/tartaLaberinto.jpeg"));
     private final Image MATE = new Image(getClass().getResourceAsStream("/imagenes/mate.jpg"));
 
+    private final String MENSAJE_IBUPROFENO = """
+                                              TENIAS UN IBUPROFENO, LO USAS Y CURAS TUS PROBLEMAS DE SALUD
+                                              Puedes seguir avanzando""";
+    private final String MENSAJE_TARTA = """
+                                         Te comes la tarta, oh no! eres intolerante a la lactosa, te enfermas.
+                                         Y decides ir al veterinario.""";
+    private final String MENSAJE_MATE = "Te tomas el mate pero estaba frío, debes correr al baño para ello debes regresar al inicio.";
+    private final String MENSAJE_MUERTE = "Sin embargo, por el camino te resbalas y mueres";
+
     @FXML
     private TextArea cuadroTexto;
 
@@ -38,7 +47,7 @@ public class HabitacionComidaController extends HabitacionBase {
     private ImageView imagenA, imagenA1, muerte;
 
     private final String TEXTO_INICIAL = "Escoge entre tarta y mate, debes dar clic a uno de los dos";
-    
+
     /**
      * Inicializa la habitación de comida.
      *
@@ -75,7 +84,7 @@ public class HabitacionComidaController extends HabitacionBase {
                     super.avanzar(event, cuadroTexto);
             }
         } else {
-            cuadroTexto.setText("Debes escoger entre la tarta y el mate");
+            cuadroTexto.setText(TEXTO_INICIAL);
         }
     }
 
@@ -141,14 +150,14 @@ public class HabitacionComidaController extends HabitacionBase {
      * Maneja el caso en que el jugador tenga ibuprofeno.
      */
     private void manejarIbuprofeno() {
-        cuadroTexto.setText("TENIAS UN IBUPROFENO, LO USAS Y CURAS TUS PROBLEMAS DE SALUD\nPuedes seguir avanzando");
+        cuadroTexto.setText(MENSAJE_IBUPROFENO);
     }
 
     /**
      * Maneja el caso en que el jugador elija la tarta.
      */
     private void manejarTarta() {
-        cuadroTexto.setText("Te comes la tarta, oh no! eres intolerante a la lactosa, te enfermas y decides ir al veterinario para ello debes regresar al inicio.");
+        cuadroTexto.setText(MENSAJE_TARTA);
         muerteInevitable();
     }
 
@@ -156,7 +165,7 @@ public class HabitacionComidaController extends HabitacionBase {
      * Maneja el caso en que el jugador elija el mate.
      */
     private void manejarMate() {
-        cuadroTexto.setText("Te tomas el mate pero estaba frío, debes correr al baño para ello debes regresar al inicio.");
+        cuadroTexto.setText(MENSAJE_MATE);
         muerteInevitable();
 
     }
@@ -173,7 +182,7 @@ public class HabitacionComidaController extends HabitacionBase {
         pause1.setOnFinished(e -> {
             Image image3 = new Image(getClass().getResourceAsStream("/imagenes/deatj.jpg"));
             muerte.setImage(image3);
-            cuadroTexto.setText("Sin embargo, por el camino te resbalas y mueres");
+            cuadroTexto.setText(MENSAJE_MUERTE);
 
             PauseTransition pause2 = new PauseTransition(Duration.seconds(5));
             pause2.setOnFinished(ev -> main.cerrarAplicacion());

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
@@ -7,8 +8,11 @@
 
 <AnchorPane id="AnchorPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.comercio.laberintointerfaz.HabitacionAController">
    <children>
-      <ImageView fx:id="imagenA" fitHeight="328.0" layoutX="-1.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" />
-      <TextArea fx:id="cuadroTexto" layoutY="325.0" onKeyPressed="#avanzar" prefHeight="76.0" prefWidth="600.0" />
-      <Button fx:id="botonBot" layoutX="503.0" layoutY="304.0" mnemonicParsing="false" onAction="#test" prefHeight="25.0" prefWidth="97.0" text="BOT" />
+      <ImageView fx:id="imagenA" fitHeight="362.0" fitWidth="650.0" pickOnBounds="true">
+         <viewport>
+            <Rectangle2D width="500.0" />
+         </viewport></ImageView>
+      <TextArea fx:id="cuadroTexto" layoutY="362.0" onKeyPressed="#avanzar" prefHeight="79.0" prefWidth="650.0" />
+      <Button fx:id="botonBot" layoutX="553.0" layoutY="337.0" mnemonicParsing="false" onAction="#fichero" prefHeight="25.0" prefWidth="97.0" text="BOT" />
    </children>
 </AnchorPane>

@@ -4,10 +4,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="ies.comercio.laberintointerfaz.HabitacionPrePollitoController">
+<AnchorPane id="AnchorPane" minHeight="441.0" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ies.comercio.laberintointerfaz.HabitacionPrePollitoController">
    <children>
-      <ImageView fx:id="imagenA" fitHeight="359.0" fitWidth="620.0" pickOnBounds="true" preserveRatio="true" />
-      <TextArea fx:id="cuadroTexto" layoutY="357.0" onKeyPressed="#avanzar" prefHeight="64.0" prefWidth="620.0" />
+      <ImageView fx:id="imagenA" fitHeight="362.0" fitWidth="650.0" pickOnBounds="true" />
+      <TextArea fx:id="cuadroTexto" layoutY="362.0" onKeyPressed="#avanzar" prefHeight="79.0" prefWidth="650.0" />
    </children>
 </AnchorPane>

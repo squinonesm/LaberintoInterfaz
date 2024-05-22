@@ -36,8 +36,9 @@ public class HabitacionPreNoxusController extends HabitacionBase {
                                          PULSA S PARA ACEPTAR O N PARA NO ACEPTAR""";
     private final String NOXUS = "Noxus te mira fijamente";
     
-    private final String AEROPUERTO = "TE HAS CONSEGUIDO SALVAR POR LA MINIMA, VES A NOXUS MIRARTE CON RECELO DESDE LEJOS "
-            + "LO MEJOR SERA IRSE PRONTO DE AQUI";
+    private final String AEROPUERTO = """
+                                      TE HAS CONSEGUIDO SALVAR POR LA MINIMA, 
+                                      VES A NOXUS MIRARTE CON RECELO DESDE LEJOS LO MEJOR SERA IRSE PRONTO DE AQUI""";
 
     private final String USAR_VISA = "FUISTE LLEVADO AL AEROPUERTO LISTO PARA SER DEPORTADO, PERO MUESTRAS TU VISA"
             + "Y TE DEJAN QUEDARTE";

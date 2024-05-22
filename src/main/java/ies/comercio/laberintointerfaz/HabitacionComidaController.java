@@ -30,23 +30,28 @@ public class HabitacionComidaController extends HabitacionBase {
     private final Image IMAGE_RUN = new Image(getClass().getResourceAsStream("/imagenes/rataCorriendo.jpeg"));
     private final Image TARTA = new Image(getClass().getResourceAsStream("/imagenes/tartaLaberinto.jpeg"));
     private final Image MATE = new Image(getClass().getResourceAsStream("/imagenes/mate.jpg"));
+    private final Image POST_DECISION_MATE = new Image(getClass().getResourceAsStream("/imagenes/rataSaciosaLaberinto.jpg"));
+    private final Image POST_DECISION_TARTA = new Image(getClass().getResourceAsStream("/imagenes/rataGolosaLaberinto.jpg"));
 
     private final String MENSAJE_IBUPROFENO = """
-                                              TENIAS UN IBUPROFENO, LO USAS Y CURAS TUS PROBLEMAS DE SALUD
-                                              Puedes seguir avanzando""";
+                                              LA COMIDA TE PRODUCE MALESTAR, PERO COMO TENIAS UN IBUPROFENO, 
+                                              LO USAS Y CURAS TUS PROBLEMAS DE SALUD
+                                              Puedes seguir avanzando/comiendo tranquil@""";
     private final String MENSAJE_TARTA = """
                                          Te comes la tarta, oh no! eres intolerante a la lactosa, te enfermas.
                                          Y decides ir al veterinario.""";
+
     private final String MENSAJE_MATE = "Te tomas el mate pero estaba frío, debes correr al baño";
-    private final String MENSAJE_MUERTE = "Sin embargo, por el camino te resbalas y mueres";
+
+    private final String MENSAJE_MUERTE = "Sin embargo, por el camino te resbalas y mueres.";
+
+    private final String TEXTO_INICIAL = "Escoge entre tarta y mate, debes dar clic a uno de los dos";
 
     @FXML
     private TextArea cuadroTexto;
 
     @FXML
-    private ImageView imagenA, imagenA1, muerte;
-
-    private final String TEXTO_INICIAL = "Escoge entre tarta y mate, debes dar clic a uno de los dos";
+    private ImageView imagenA, imagenA1, muerte, postDecision;
 
     /**
      * Inicializa la habitación de comida.
@@ -56,6 +61,7 @@ public class HabitacionComidaController extends HabitacionBase {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        postDecision.setVisible(false);
         imagenA.setImage(TARTA);
         imagenA1.setImage(MATE);
         cuadroTexto.setText(TEXTO_INICIAL);
@@ -92,6 +98,9 @@ public class HabitacionComidaController extends HabitacionBase {
      * Restaura el estado inicial de la habitación.
      */
     public void estadoInicial() {
+        imagenA.setVisible(true);
+        imagenA1.setVisible(true);
+        postDecision.setVisible(false);
         imagenA.setImage(TARTA);
         imagenA1.setImage(MATE);
         cuadroTexto.setText(TEXTO_INICIAL);
@@ -105,6 +114,8 @@ public class HabitacionComidaController extends HabitacionBase {
      */
     @FXML
     void mate(MouseEvent event) throws IOException {
+        postDecision();
+        postDecision.setImage(POST_DECISION_MATE);
         manejarDecision("M");
         evento = false;
     }
@@ -117,8 +128,16 @@ public class HabitacionComidaController extends HabitacionBase {
      */
     @FXML
     void tarta(MouseEvent event) throws IOException {
+        postDecision();
+        postDecision.setImage(POST_DECISION_TARTA);
         manejarDecision("T");
         evento = false;
+    }
+
+    public void postDecision() {
+        imagenA.setVisible(false);
+        imagenA1.setVisible(false);
+        postDecision.setVisible(true);
     }
 
     /**
@@ -132,8 +151,6 @@ public class HabitacionComidaController extends HabitacionBase {
         juego.actualizarDecision(decision);
         if (juego.descripcionHabitacion().equals("MEDICO")) {
             juego.irA("oeste");
-        } else {
-            juego.irA("norte");
         }
         evento = false;
 
@@ -176,6 +193,7 @@ public class HabitacionComidaController extends HabitacionBase {
     private void muerteInevitable() {
         imagenA.setVisible(false);
         imagenA1.setVisible(false);
+        postDecision.setVisible(false);
         muerte.setImage(IMAGE_RUN);
 
         PauseTransition pause1 = new PauseTransition(Duration.seconds(5));

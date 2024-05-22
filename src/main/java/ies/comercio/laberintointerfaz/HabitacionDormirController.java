@@ -54,6 +54,7 @@ public class HabitacionDormirController extends HabitacionBase {
 
     private final Image DORMIR = new Image(getClass().getResourceAsStream("/imagenes/dormirLaberinto.jpg"));
     private final Image DURMIENDO = new Image(getClass().getResourceAsStream("/imagenes/durmiendoLaberinto.jpg"));
+    private final Image DURMIENDO_FRUTA = new Image(getClass().getResourceAsStream("/imagenes/rataMalaLaberinto.jpg"));
     
     /**
      * Inicializa la habitación del sueño.
@@ -106,6 +107,7 @@ public class HabitacionDormirController extends HabitacionBase {
                         imagenA.setImage(DURMIENDO);
                         if (juego.devolverContador()) {
                             simularDormir(() -> {
+                                imagenA.setImage(DURMIENDO_FRUTA);
                                 cuadroTexto.setText(TEXTO_DORMIR_CONT);
                                 main.cerrarAplicacion();
                             });

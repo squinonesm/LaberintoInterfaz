@@ -10,14 +10,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import laberintoJuego.Juego;
 
-
 /**
- * Controlador para la habitación previa al encuentro con Pollito.
- * En esta habitación, el jugador se encuentra con Pollito y tiene la opción de atacarlo o hacerle una reverencia.
- * Si el jugador tiene una fruta, también puede decidir dársela a Pollito.
- * Después de tomar una decisión, se presentan opciones para avanzar a otras habitaciones.
- * Esta clase controla las interacciones y eventos en la habitación previa al encuentro con Pollito.
- * 
+ * Controlador para la habitación previa al encuentro con Pollito. En esta
+ * habitación, el jugador se encuentra con Pollito y tiene la opción de atacarlo
+ * o hacerle una reverencia. Si el jugador tiene una fruta, también puede
+ * decidir dársela a Pollito. Después de tomar una decisión, se presentan
+ * opciones para avanzar a otras habitaciones. Esta clase controla las
+ * interacciones y eventos en la habitación previa al encuentro con Pollito.
+ *
  * @author Quiñones Majuelo, Sergio
  */
 public class HabitacionPrePollitoController extends HabitacionBase {
@@ -25,6 +25,10 @@ public class HabitacionPrePollitoController extends HabitacionBase {
     private boolean evento = false;
     private boolean decisionTomada = false;
     private boolean primerEncuentro = false;
+
+    private final Image IMAGE = new Image(getClass().getResourceAsStream("/imagenes/murcielagoDecisionLaberinto.jpeg"));
+    private final Image IMAGE2 = new Image(getClass().getResourceAsStream("/imagenes/murcielagoLaberintoR.jpeg"));
+    private final Image IMAGE3 = new Image(getClass().getResourceAsStream("/imagenes/murcielagoLaberintoBadEnding.jpeg"));
 
     private static final String TEXTO_INICIAL = """
                                                 TE ENCUENTRAS CON POLLITO. \u00bfQUIERES ATACARLO O HACER UNA REVERENCIA?
@@ -36,8 +40,11 @@ public class HabitacionPrePollitoController extends HabitacionBase {
     private static final String MENSAJE_ERROR = """
                                                 DEBES PULSAR A PARA ATACAR
                                                 O R PARA HACER UNA REVERENCIA""";
-    private static final String MENSAJE_ERROR2 = "HAS ENTRADO, PULSA ENTER\n";
     private static final String MENSAJE_ERROR3 = "DEBES PULSAR S O N, DEBES TOMAR UNA DECISION\n";
+
+    private static final String MENSAJE_POST_R = """
+                                                 POLLITO TE HA DEJADO ENTRAR Y TE MIRA MIENTRAS SE COME SU FRUTA TAN RICAMENTE
+                                                 [PULSA ENTER PARA CONTINUAR]""";
     private static final String MENSAJE_FRUTA = """
                                                 TIENES UNA FRUTA. \u00bfQUIERES D\u00c1RSELA A POLLITO?
                                                 PULSA S PARA D\u00c1RSELA O N PARA NO D\u00c1RSELA""";
@@ -58,14 +65,13 @@ public class HabitacionPrePollitoController extends HabitacionBase {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/murcielago.png"));
-        imagenA.setImage(image);
+        imagenA.setImage(IMAGE);
         cuadroTexto.setText(TEXTO_INICIAL);
         cuadroTexto.setEditable(false);
         cuadroTexto.requestFocus();
     }
-    
-     /**
+
+    /**
      * Maneja el evento de teclado para avanzar en la habitación.
      *
      * @param event El evento de teclado.
@@ -85,7 +91,7 @@ public class HabitacionPrePollitoController extends HabitacionBase {
             }
         }
     }
-    
+
     /**
      * Maneja el encuentro inicial con Pollito.
      *
@@ -96,21 +102,28 @@ public class HabitacionPrePollitoController extends HabitacionBase {
         switch (event.getCode()) {
             case A -> {
                 cuadroTexto.setText(MENSAJE_ATACAR);
-                Image imagen = new Image(getClass().getResourceAsStream("/imagenes/deatj.jpg"));
-                imagenA.setImage(imagen);
+                imagenA.setImage(IMAGE3);
                 main.cerrarAplicacion();
             }
             case R -> {
-                cuadroTexto.setText("HAS ENTRADO, PULSA ENTER");
-                juego.actualizarDecision("R");
-                primerEncuentro = true;
-                juego.irA("oeste");
+                if (juego.saberHabitacionActual().getDescripcion().equals("POLLITO")) {
+                    cuadroTexto.setText(MENSAJE_POST_R);
+                    imagenA.setImage(IMAGE2);
+                    juego.actualizarDecision("R");
+                    primerEncuentro = true;
+                } else {
+                    cuadroTexto.setText(MENSAJE_POST_R);
+                    imagenA.setImage(IMAGE2);
+                    juego.actualizarDecision("R");
+                    primerEncuentro = true;
+                    juego.irA("oeste");
+                }
             }
             default ->
                 cuadroTexto.setText(MENSAJE_ERROR);
         }
     }
-    
+
     /**
      * Maneja el desencadenante del evento.
      *
@@ -128,10 +141,10 @@ public class HabitacionPrePollitoController extends HabitacionBase {
                 decisionTomada = true;
             }
         } else {
-            cuadroTexto.setText(MENSAJE_ERROR2);
+            cuadroTexto.setText(MENSAJE_POST_R);
         }
     }
-    
+
     /**
      * Maneja la decisión del jugador.
      *
@@ -145,6 +158,7 @@ public class HabitacionPrePollitoController extends HabitacionBase {
                 decisionTomada = true;
             }
             case N -> {
+                imagenA.setImage(IMAGE3);
                 cuadroTexto.setText(MENSAJE_DEVORADO);
                 main.cerrarAplicacion();
                 decisionTomada = true;
@@ -153,7 +167,7 @@ public class HabitacionPrePollitoController extends HabitacionBase {
                 cuadroTexto.setText(MENSAJE_ERROR3);
         }
     }
-    
+
     /**
      * Maneja la situación después de que se toma una decisión.
      *
@@ -182,7 +196,7 @@ public class HabitacionPrePollitoController extends HabitacionBase {
                 super.avanzar(event, cuadroTexto);
         }
     }
-    
+
     /**
      * Restablece los eventos a su estado inicial.
      */
@@ -191,16 +205,16 @@ public class HabitacionPrePollitoController extends HabitacionBase {
         evento = false;
         decisionTomada = false;
     }
-    
+
     /**
      * Restaura el estado inicial de la habitación.
      */
     public void estadoInicial() {
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/murcielago.png"));
+        Image image = new Image(getClass().getResourceAsStream("/imagenes/murcielagoDecisionLaberinto.jpeg"));
         imagenA.setImage(image);
         cuadroTexto.setText(TEXTO_INICIAL);
     }
-    
+
     /**
      * Establece el juego asociado a esta habitación.
      *
@@ -210,8 +224,8 @@ public class HabitacionPrePollitoController extends HabitacionBase {
     public void setJuego(Juego juego) {
         this.juego = juego;
     }
-    
-     /**
+
+    /**
      * Establece la aplicación principal.
      *
      * @param main La aplicación principal.

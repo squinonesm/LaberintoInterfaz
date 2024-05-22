@@ -27,7 +27,9 @@ import javafx.util.Duration;
 public class HabitacionComidaController extends HabitacionBase {
 
     private boolean evento = true;
-    private final Image imageRun = new Image(getClass().getResourceAsStream("/imagenes/run.gif"));
+    private final Image IMAGE_RUN = new Image(getClass().getResourceAsStream("/imagenes/rataCorriendo.jpeg"));
+    private final Image TARTA = new Image(getClass().getResourceAsStream("/imagenes/tartaLaberinto.jpeg"));
+    private final Image MATE = new Image(getClass().getResourceAsStream("/imagenes/mate.jpg"));
 
     @FXML
     private TextArea cuadroTexto;
@@ -36,7 +38,7 @@ public class HabitacionComidaController extends HabitacionBase {
     private ImageView imagenA, imagenA1, muerte;
 
     private final String TEXTO_INICIAL = "Escoge entre tarta y mate, debes dar clic a uno de los dos";
-
+    
     /**
      * Inicializa la habitación de comida.
      *
@@ -45,10 +47,8 @@ public class HabitacionComidaController extends HabitacionBase {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/tarta.jpg"));
-        imagenA.setImage(image);
-        Image image2 = new Image(getClass().getResourceAsStream("/imagenes/mate.jpg"));
-        imagenA1.setImage(image2);
+        imagenA.setImage(TARTA);
+        imagenA1.setImage(MATE);
         cuadroTexto.setText(TEXTO_INICIAL);
         cuadroTexto.setEditable(false);
         cuadroTexto.requestFocus();
@@ -83,10 +83,8 @@ public class HabitacionComidaController extends HabitacionBase {
      * Restaura el estado inicial de la habitación.
      */
     public void estadoInicial() {
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/tarta.jpg"));
-        imagenA.setImage(image);
-        Image image2 = new Image(getClass().getResourceAsStream("/imagenes/mate.jpg"));
-        imagenA1.setImage(image2);
+        imagenA.setImage(TARTA);
+        imagenA1.setImage(MATE);
         cuadroTexto.setText(TEXTO_INICIAL);
     }
 
@@ -169,7 +167,7 @@ public class HabitacionComidaController extends HabitacionBase {
     private void muerteInevitable() {
         imagenA.setVisible(false);
         imagenA1.setVisible(false);
-        muerte.setImage(imageRun);
+        muerte.setImage(IMAGE_RUN);
 
         PauseTransition pause1 = new PauseTransition(Duration.seconds(5));
         pause1.setOnFinished(e -> {

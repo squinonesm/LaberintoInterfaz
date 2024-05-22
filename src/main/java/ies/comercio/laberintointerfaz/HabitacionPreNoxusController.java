@@ -31,13 +31,22 @@ public class HabitacionPreNoxusController extends HabitacionBase {
     @FXML
     private TextArea cuadroTexto;
 
-    private final String TEXTO_INICIAL = "¿TE ENCUENTRAS CON NOXUS QUIERES ACEPTAR SU AYUDA?\n"
-            + "PULSA S PARA ACEPTAR O N PARA NO ACEPTAR";
+    private final String TEXTO_INICIAL = """
+                                         \u00bfTE ENCUENTRAS CON NOXUS QUIERES ACEPTAR SU AYUDA?
+                                         PULSA S PARA ACEPTAR O N PARA NO ACEPTAR""";
     private final String NOXUS = "Noxus te mira fijamente";
+    
+    private final String AEROPUERTO = "TE HAS CONSEGUIDO SALVAR POR LA MINIMA, VES A NOXUS MIRARTE CON RECELO DESDE LEJOS "
+            + "LO MEJOR SERA IRSE PRONTO DE AQUI";
 
-    private final Image NOXUS_IMAGEN = new Image(getClass().getResourceAsStream("/imagenes/cat.gif"));
-    private final Image VISA = new Image(getClass().getResourceAsStream("/imagenes/visa.jpg"));
-    private final Image AVION = new Image(getClass().getResourceAsStream("/imagenes/avion.jpg"));
+    private final String USAR_VISA = "FUISTE LLEVADO AL AEROPUERTO LISTO PARA SER DEPORTADO, PERO MUESTRAS TU VISA"
+            + "Y TE DEJAN QUEDARTE";
+    
+
+    private final Image NOXUS_IMAGEN = new Image(getClass().getResourceAsStream("/imagenes/gatoLaberinto.jpeg"));
+    private final Image VISA = new Image(getClass().getResourceAsStream("/imagenes/visaLaberinto.jpeg"));
+    private final Image AVION = new Image(getClass().getResourceAsStream("/imagenes/avionLaberinto.jpeg"));
+    private final Image AEROPUERTO_VISA = new Image(getClass().getResourceAsStream("/imagenes/aeropuertoLaberinto.jpeg"));
 
     /**
      * Inicializa la habitación previa a Noxus.
@@ -89,23 +98,26 @@ public class HabitacionPreNoxusController extends HabitacionBase {
                     manejarDecision("N");
                 case UP -> {
                     if (!evento) {
-                        cuadroTexto.setText(TEXTO_INICIAL);
-                        evento = true;
+                        estadoInicial();
                         main.cambiarEscena("hbA");
                         juego.irA("norte");
                     }
                 }
                 default -> {
                     if (evento) {
-                        cuadroTexto.setText("DEBES PULSAR S PARA ACEPTAR SU AYUDA\n"
-                                + "O N PARA NO ACE"
-                                + "PTARLA");
+                        cuadroTexto.setText(TEXTO_INICIAL);
                     } else {
                         super.avanzar(event, cuadroTexto);
                     }
                 }
             }
         }
+    }
+    
+    public void estadoInicial(){
+        cuadroTexto.setText(TEXTO_INICIAL);
+        evento = true;
+        imagenA.setImage(NOXUS_IMAGEN);
     }
 
     /**
@@ -125,7 +137,7 @@ public class HabitacionPreNoxusController extends HabitacionBase {
             }
         } else if (decision.equals("N")) {
             evento = false;
-            cuadroTexto.setText("Noxus te mira fijamente");
+            cuadroTexto.setText(NOXUS);
         }
     }
 
@@ -133,15 +145,15 @@ public class HabitacionPreNoxusController extends HabitacionBase {
      * Maneja la situación cuando el jugador tiene una visa.
      */
     private void manejarVisa() {
-        cuadroTexto.setText("Te has salvado al tener una visa, la usas y te quedas donde estabas");
+        cuadroTexto.setText(USAR_VISA);
         imagenA.setImage(VISA);
         new Thread(() -> {
             try {
                 Thread.sleep(5000);
                 Platform.runLater(() -> {
-                    cuadroTexto.setText(NOXUS);
+                    cuadroTexto.setText(AEROPUERTO);
                     evento = false;
-                    imagenA.setImage(NOXUS_IMAGEN);
+                    imagenA.setImage(AEROPUERTO_VISA);
                 });
             } catch (InterruptedException e) {
             }

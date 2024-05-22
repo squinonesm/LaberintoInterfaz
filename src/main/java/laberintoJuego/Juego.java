@@ -38,8 +38,8 @@ public final class Juego {
         Habitacion habitacionA = new HabitacionConItem("MEDICO", "Ibuprofeno");
         Habitacion habitacionB = new HabitacionConItem("VIAJERO", "VISA");
         Habitacion habitacionC = new HabitacionNoxus("NOXUS");
-        Habitacion habitacionD = new Habitacion("NPC");
-        Habitacion habitacionE = new Habitacion("NPC");
+        Habitacion habitacionD = new Habitacion("HABITACION DE PASO");
+        Habitacion habitacionE = new Habitacion("HABITACION DE PASO 2");
         Habitacion habitacionF = new HabitacionMerienda("HABITACION DE LA GULA");
         Habitacion habitacionG = new HabitacionConItem("FRUTERO", "FRUTA");
         Habitacion habitacionH = new HabitacionPollito("POLLITO");
@@ -137,6 +137,7 @@ public final class Juego {
         if (nuevaHabitacion != null) {
             habitacionActual = nuevaHabitacion;
             System.out.println("HAS CAMBIADO DE SALA");
+            System.out.println(habitacionActual.getDescripcion());
             
             // Llama al método específico de la habitación actual
             accionHabitacionActual();

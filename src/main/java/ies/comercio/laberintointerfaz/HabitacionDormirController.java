@@ -132,7 +132,7 @@ public class HabitacionDormirController extends HabitacionBase {
                             cuadroTexto.setText(TEXTO_DORMIR);
                         }
                     } else {
-                        cuadroTexto.setText(TEXTO_DORMIR);
+                        cuadroTexto.setText(TEXTO_INICIAL);
                     }
                 }
                 default -> {

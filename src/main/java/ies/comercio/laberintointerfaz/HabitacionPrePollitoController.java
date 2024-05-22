@@ -30,26 +30,26 @@ public class HabitacionPrePollitoController extends HabitacionBase {
     private final Image IMAGE2 = new Image(getClass().getResourceAsStream("/imagenes/murcielagoLaberintoR.jpeg"));
     private final Image IMAGE3 = new Image(getClass().getResourceAsStream("/imagenes/murcielagoLaberintoBadEnding.jpeg"));
 
-    private static final String TEXTO_INICIAL = """
+    private final String TEXTO_INICIAL = """
                                                 TE ENCUENTRAS CON POLLITO. \u00bfQUIERES ATACARLO O HACER UNA REVERENCIA?
                                                 PULSA A PARA ATACAR O R PARA HACER UNA REVERENCIA""";
-    private static final String MENSAJE_ATACAR = """
+    private final String MENSAJE_ATACAR = """
                                                  ATACAS A POLLITO.
                                                  PERO NO ERES RIVAL PARA SUS GARRAS.
                                                  MUERES ENTRE TERRIBLES SUFRIMIENTOS.""";
-    private static final String MENSAJE_ERROR = """
+    private final String MENSAJE_ERROR = """
                                                 DEBES PULSAR A PARA ATACAR
                                                 O R PARA HACER UNA REVERENCIA""";
-    private static final String MENSAJE_ERROR3 = "DEBES PULSAR S O N, DEBES TOMAR UNA DECISION\n";
+    private final String MENSAJE_ERROR3 = "DEBES PULSAR S O N, DEBES TOMAR UNA DECISION\n";
 
-    private static final String MENSAJE_POST_R = """
+    private final String MENSAJE_POST_R = """
                                                  POLLITO TE HA DEJADO ENTRAR Y TE MIRA MIENTRAS SE COME SU FRUTA TAN RICAMENTE
                                                  [PULSA ENTER PARA CONTINUAR]""";
-    private static final String MENSAJE_FRUTA = """
+    private final String MENSAJE_FRUTA = """
                                                 TIENES UNA FRUTA. \u00bfQUIERES D\u00c1RSELA A POLLITO?
                                                 PULSA S PARA D\u00c1RSELA O N PARA NO D\u00c1RSELA""";
-    private static final String MENSAJE_POLLITO = "POLLITO TE MIRA FIJAMENTE";
-    private static final String MENSAJE_DEVORADO = "Has decicido no darle la fruta a pollito.. y VAS A SER DEVORADO";
+    private final String MENSAJE_POLLITO = "POLLITO TE MIRA FIJAMENTE";
+    private final String MENSAJE_DEVORADO = "Has decicido no darle la fruta a pollito.. y VAS A SER DEVORADO";
 
     @FXML
     private TextArea cuadroTexto;

@@ -52,6 +52,9 @@ public class HabitacionDormirController extends HabitacionBase {
                                             O N PARA NO ECHARTE LA SIESTA
                                         """;
 
+    private final Image DORMIR = new Image(getClass().getResourceAsStream("/imagenes/dormirLaberinto.jpg"));
+    private final Image DURMIENDO = new Image(getClass().getResourceAsStream("/imagenes/durmiendoLaberinto.jpg"));
+    
     /**
      * Inicializa la habitación del sueño.
      *
@@ -60,8 +63,7 @@ public class HabitacionDormirController extends HabitacionBase {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/dormir.jpg"));
-        imagenA.setImage(image);
+        imagenA.setImage(DORMIR);
         cuadroTexto.setText(TEXTO_INICIAL);
         cuadroTexto.setEditable(false);
         Platform.runLater(() -> cuadroTexto.requestFocus());
@@ -101,6 +103,7 @@ public class HabitacionDormirController extends HabitacionBase {
                     if (evento) {
                         evento = false;
                         cuadroTexto.setText(TEXTO_DORMIR);
+                        imagenA.setImage(DURMIENDO);
                         if (juego.devolverContador()) {
                             simularDormir(() -> {
                                 cuadroTexto.setText(TEXTO_DORMIR_CONT);
@@ -108,6 +111,7 @@ public class HabitacionDormirController extends HabitacionBase {
                             });
                         } else {
                             simularDormir(() -> {
+                                imagenA.setImage(DORMIR);
                                 cuadroTexto.setText(DESPERTAR);
                                 juego.irA("sur");
                             });

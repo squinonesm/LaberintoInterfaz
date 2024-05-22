@@ -37,7 +37,7 @@ public class HabitacionComidaController extends HabitacionBase {
     private final String MENSAJE_TARTA = """
                                          Te comes la tarta, oh no! eres intolerante a la lactosa, te enfermas.
                                          Y decides ir al veterinario.""";
-    private final String MENSAJE_MATE = "Te tomas el mate pero estaba frío, debes correr al baño para ello debes regresar al inicio.";
+    private final String MENSAJE_MATE = "Te tomas el mate pero estaba frío, debes correr al baño";
     private final String MENSAJE_MUERTE = "Sin embargo, por el camino te resbalas y mueres";
 
     @FXML

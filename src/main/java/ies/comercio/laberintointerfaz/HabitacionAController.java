@@ -35,6 +35,8 @@ public class HabitacionAController extends HabitacionBase {
     private final Image IBUPROFENO = new Image(getClass().getResourceAsStream("/imagenes/ibuprofenoLaberinto.jpeg"));
     private final Image VISA = new Image(getClass().getResourceAsStream("/imagenes/visaItemLaberinto.jpeg"));
     private final Image FRUTA = new Image(getClass().getResourceAsStream("/imagenes/frutaLaberinto.jpeg"));
+    private final Image IA = new Image(getClass().getResourceAsStream("/imagenes/ia.gif"));
+    private final Image FOTO_INICIAL = new Image(getClass().getResourceAsStream("/imagenes/Chupivilla2.1 map.jpg"));
 
     @FXML
     private Button botonBot;
@@ -75,8 +77,7 @@ public class HabitacionAController extends HabitacionBase {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Image image = new Image(getClass().getResourceAsStream("/imagenes/Chupivilla2.1 map.jpg"));
-        imagenA.setImage(image);
+        imagenA.setImage(FOTO_INICIAL);
         cuadroTexto.setEditable(false);
         cuadroTexto.requestFocus();
 
@@ -91,8 +92,7 @@ public class HabitacionAController extends HabitacionBase {
      */
     @FXML
     void fichero(ActionEvent event) {
-        Image image2 = new Image(getClass().getResourceAsStream("/imagenes/ia.gif"));
-        imagenA.setImage(image2);
+        imagenA.setImage(IA);
         cuadroTexto.setText("DEJA A LA IA JUGAR TRANQUILA.");
         System.out.println("Botón presionado. Intentando cargar comandos desde fichero.");
         try {

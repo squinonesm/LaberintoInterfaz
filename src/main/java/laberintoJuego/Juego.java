@@ -115,9 +115,8 @@ public final class Juego {
                - ↓: Para moverte hacia abajo.
                - ←: Para moverte hacia la izquierda.
                - →: Para moverte hacia la derecha.
-               - A: Para ver los comandos disponibles.
+               - H: Para ver los comandos disponibles.
                - O: Para ver si encuentras objetos escondidos.
-               - R: Para ver las salidas de la habitación.
                - I: Para ver los objetos que has encontrado durante tu aventura.
                - P: Para ver en donde te encuentras.
                - B: Para generar el mensaje de bienvenida.
@@ -155,13 +154,13 @@ public final class Juego {
             return MENSAJE_ERROR;
         }
     }
-
     /**
      * Devuelve la descripción de la habitación actual.
      *
      * @return La descripción de la habitación actual.
      */
     public String descripcionHabitacion() {
+       
         return habitacionActual.getDescripcion();
     }
 
